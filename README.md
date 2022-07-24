@@ -2,8 +2,21 @@
 
 ## Build
 
-Run this command in the root folder:
+Run command in the root folder to build 
+
+bootloader:
 ```
+bazel build bootloader
+```
+
+application:
+```
+bazel build application
+```
+
+Optionally, you can specify compiler:
+```
+bazel build bootloader --config=arm_none_eabi_<VERSION>
 bazel build application --config=arm_none_eabi_<VERSION>
 ```
 
@@ -47,8 +60,7 @@ build:<NAME_OF_TOOLHCAIN> --host_crosstool_top=@bazel_tools//tools/cpp:toolchain
 
 # TODO
 
-1. Make linker and compiler flags configurable.
-2. Add more *arm-none-eabi* versions.
-3. Add bootloader.
-4. Move all application memory sections (e.g. *.text*) to RAM.
-5. Add bazel target to generate *.hex file and flash it.
+* Make linker and compiler flags configurable.
+* Add more *arm-none-eabi* versions.
+* Move all application memory sections (e.g. *.text*) to RAM.
+* Add bazel target to generate *.hex file and flash it.

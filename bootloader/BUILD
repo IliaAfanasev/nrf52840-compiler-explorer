@@ -1,13 +1,13 @@
 cc_binary(
-    name = "application",
+    name = "bootloader",
     srcs = [
         "src/main.cc",
     ],
     linkopts = [
-        "-T$(location :application.ld)",
+        "-T$(location :bootloader.ld)",
     ],
     deps = [
-        ":application.ld",
+        ":bootloader.ld",
         "//board",
     ],
 )

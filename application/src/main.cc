@@ -2,7 +2,7 @@
 #include <iostream>
 
 int main() {
-  std::cout << "Hello world\r\n";
+  std::cout << "application\r\n";
   while (true) {
   }
   return 0;

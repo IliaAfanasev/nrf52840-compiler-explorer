@@ -23,7 +23,6 @@ Checks: >
   -modernize-use-nodiscard,
   -modernize-use-trailing-return-type,
 
-  performance-*,
   readability-*,
   -readability-function-cognitive-complexity,
   -readability-identifier-length,
