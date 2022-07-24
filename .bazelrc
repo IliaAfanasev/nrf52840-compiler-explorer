@@ -5,3 +5,7 @@ build:arm_none_eabi_10_3 --host_crosstool_top=@bazel_tools//tools/cpp:toolchain
 build:arm_none_eabi_11_2 --crosstool_top=//toolchain:arm_none_eabi_suite
 build:arm_none_eabi_11_2 --cpu=arm_none_eabi_11_2
 build:arm_none_eabi_11_2 --host_crosstool_top=@bazel_tools//tools/cpp:toolchain
+
+build --crosstool_top=//toolchain:arm_none_eabi_suite
+build --cpu=arm_none_eabi_11_2
+build --host_crosstool_top=@bazel_tools//tools/cpp:toolchain
