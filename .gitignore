@@ -1,0 +1,7 @@
+bazel-*
+.vscode/
+**/*.elf
+**/*.out
+**/*.hex
+**/*.bin
+**/*.bak
