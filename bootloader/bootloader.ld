@@ -15,7 +15,7 @@ SECTIONS
     .application_isr_vector :
     {
         __application_isr_vector__ = .;
-    } > FLASH_APPLICATION
+    } > RAM_APPLICATION
 
     .text :
     {

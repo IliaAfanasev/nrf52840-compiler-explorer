@@ -85,4 +85,4 @@ extern "C" void _exit(int /*rc*/) {}
 
 extern "C" int _kill(pid_t /*pid*/, int /*sig*/) { return -1; }
 
-extern "C" pid_t __attribute__((section("data"))) _getpid() { return 1; }
+extern "C" pid_t _getpid() { return 1; }

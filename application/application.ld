@@ -37,30 +37,30 @@ SECTIONS
         *(.rodata*)
 
         KEEP(*(.eh_frame*))
-    } > FLASH_APPLICATION
+    } > RAM_APPLICATION
 
     .gnu.sgstubs :
     {
         . = ALIGN(32);
-    } > FLASH_APPLICATION
+    } > RAM_APPLICATION
 
     .ARM.extab : 
     {
         *(.ARM.extab* .gnu.linkonce.armextab.*)
-    } > FLASH_APPLICATION
+    } > RAM_APPLICATION
 
     .ARM.exidx :
     {
         __exidx_start = .;
         *(.ARM.exidx* .gnu.linkonce.armexidx.*)
         __exidx_end = .;
-    } > FLASH_APPLICATION
+    } > RAM_APPLICATION
 
     . = ALIGN(4);
-    __etext = .;
 
-    .data : AT (__etext)
+    .data :
     {
+        __etext = .;
         __data_start__ = .;
         *(vtable)
         *(.data*)
