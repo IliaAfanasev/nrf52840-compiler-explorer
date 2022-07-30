@@ -14,6 +14,21 @@ application:
 bazel build application
 ```
 
+prevent *strip*:
+```
+bazel build <TARGET> --strip=never
+```
+
+additional compiler flags:
+```
+bazel build <TARGET> --copt="<FLAGS>"
+```
+
+example:
+```
+bazel build application --strip=never --copt="-O3"
+```
+
 Optionally, you can specify compiler:
 ```
 bazel build bootloader --config=arm_none_eabi_<VERSION>
@@ -60,7 +75,5 @@ build:<NAME_OF_TOOLHCAIN> --host_crosstool_top=@bazel_tools//tools/cpp:toolchain
 
 # TODO
 
-* Make linker and compiler flags configurable.
 * Add more *arm-none-eabi* versions.
-* Move all application memory sections (e.g. *.text*) to RAM.
 * Add bazel target to generate *.hex file and flash it.
