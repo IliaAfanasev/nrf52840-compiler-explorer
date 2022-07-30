@@ -7,6 +7,11 @@ filegroup(
     srcs = glob(["**/*"]),
 )
 
+filegroup(
+    name = "objcopy",
+    srcs = glob(["bin/arm-none-eabi-objcopy*"]),
+)
+
 cc_toolchain_config(
     name = "arm_none_eabi_config",
 )

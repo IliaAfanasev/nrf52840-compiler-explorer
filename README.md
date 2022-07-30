@@ -76,4 +76,4 @@ build:<NAME_OF_TOOLHCAIN> --host_crosstool_top=@bazel_tools//tools/cpp:toolchain
 # TODO
 
 * Add more *arm-none-eabi* versions.
-* Add bazel target to generate *.hex file and flash it.
+* Add bazel target to flash targets.
