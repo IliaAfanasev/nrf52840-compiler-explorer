@@ -4,10 +4,9 @@ ENTRY(Reset_Handler)
 
 MEMORY
 {
-  FLASH_BOOTLOADER (rx)     : ORIGIN = 0x00000000, LENGTH = 0x00010000
-  FLASH_APPLICATION (rx)    : ORIGIN = 0x00010000, LENGTH = 0x000F0000
-  RAM_BOOTLOADER (rwx)      : ORIGIN = 0x20000000, LENGTH = 0x00004000
-  RAM_APPLICATION (rwx)     : ORIGIN = 0x20004000, LENGTH = 0x0003C000
+  FLASH (rx)            : ORIGIN = 0x00000000, LENGTH = 0x00100000
+  RAM_BOOTLOADER (rwx)  : ORIGIN = 0x20000000, LENGTH = 0x00001000
+  RAM_APPLICATION (rwx) : ORIGIN = 0x20001000, LENGTH = 0x0003F000
 }
 
 SECTIONS
@@ -37,30 +36,30 @@ SECTIONS
         *(.rodata*)
 
         KEEP(*(.eh_frame*))
-    } > RAM_APPLICATION
+    } > FLASH
 
     .gnu.sgstubs :
     {
         . = ALIGN(32);
-    } > RAM_APPLICATION
+    } > FLASH
 
     .ARM.extab : 
     {
         *(.ARM.extab* .gnu.linkonce.armextab.*)
-    } > RAM_APPLICATION
+    } > FLASH
 
     .ARM.exidx :
     {
         __exidx_start = .;
         *(.ARM.exidx* .gnu.linkonce.armexidx.*)
         __exidx_end = .;
-    } > RAM_APPLICATION
+    } > FLASH
 
     . = ALIGN(4);
+    __etext = .;
 
-    .data :
+    .data : AT (__etext)
     {
-        __etext = .;
         __data_start__ = .;
         *(vtable)
         *(.data*)
@@ -85,7 +84,7 @@ SECTIONS
         KEEP(*(.jcr*))
         . = ALIGN(4);
         __data_end__ = .;
-    } > RAM_APPLICATION
+    } > RAM_BOOTLOADER
 
     .bss :
     {
@@ -95,7 +94,7 @@ SECTIONS
         *(COMMON)
         . = ALIGN(4);
         __bss_end__ = .;
-    } > RAM_APPLICATION
+    } > RAM_BOOTLOADER
 
     .heap (COPY):
     {
@@ -104,14 +103,17 @@ SECTIONS
         PROVIDE(end = .);
         KEEP(*(.heap*))
         __HeapLimit = .;
-    } > RAM_APPLICATION
+    } > RAM_BOOTLOADER
 
     .stack_dummy (COPY):
     {
         KEEP(*(.stack*))
-    } > RAM_APPLICATION
+    } > RAM_BOOTLOADER
 
-    __StackTop = ORIGIN(RAM_APPLICATION) + LENGTH(RAM_APPLICATION);
+    __StackTop = ORIGIN(RAM_BOOTLOADER) + LENGTH(RAM_BOOTLOADER);
     __StackLimit = __StackTop - SIZEOF(.stack_dummy);
     PROVIDE(__stack = __StackTop);
+
+    /* Check if data + heap + stack exceeds RAM limit */
+    ASSERT(__StackLimit >= __HeapLimit, "Region RAM overflowed with stack")
 }

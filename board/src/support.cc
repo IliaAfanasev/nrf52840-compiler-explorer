@@ -81,7 +81,10 @@ extern "C" off_t _lseek(int /*fildes*/, off_t /*offset*/, int /*whence*/) { retu
 
 extern "C" int _close(int /*fildes*/) { return -1; }
 
-extern "C" void _exit(int /*rc*/) {}
+extern "C" void _exit(int rc) {
+  while (true) {
+  }
+}
 
 extern "C" int _kill(pid_t /*pid*/, int /*sig*/) { return -1; }
 

@@ -3,11 +3,7 @@ cc_binary(
     srcs = [
         "src/main.cc",
     ],
-    linkopts = [
-        "-T$(location :application.ld)",
-    ],
     deps = [
-        ":application.ld",
-        "//board",
+        "//board:application",
     ],
 )

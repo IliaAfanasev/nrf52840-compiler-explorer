@@ -3,11 +3,7 @@ cc_binary(
     srcs = [
         "src/main.cc",
     ],
-    linkopts = [
-        "-T$(location :bootloader.ld)",
-    ],
     deps = [
-        ":bootloader.ld",
-        "//board",
+        "//board:bootloader",
     ],
 )

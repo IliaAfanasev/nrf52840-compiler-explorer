@@ -48,7 +48,6 @@ def _impl(ctx):
     ]
 
     linker_flags = [
-        "-g3",
         "-ggdb",
         "-mthumb",
         "-lstdc++",
@@ -57,11 +56,9 @@ def _impl(ctx):
         "-mfloat-abi=hard",
         "-mfpu=fpv4-sp-d16",
         "-Wl,--gc-sections",
-        # "--specs=nano.specs",
     ]
 
     cxx_flags = [
-        "-g3",
         "-ggdb",
         "-lstdc++",
         "-no-canonical-prefixes",
