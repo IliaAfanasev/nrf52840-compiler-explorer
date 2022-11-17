@@ -4,9 +4,8 @@ ENTRY(Reset_Handler)
 
 MEMORY
 {
-  FLASH (rx)            : ORIGIN = 0x00000000, LENGTH = 0x00100000
-  RAM_BOOTLOADER (rwx)  : ORIGIN = 0x20000000, LENGTH = 0x00001000
-  RAM_APPLICATION (rwx) : ORIGIN = 0x20001000, LENGTH = 0x0003F000
+  FLASH (rx)    : ORIGIN = 0x00000000, LENGTH = 0x00100000
+  RAM (rwx)     : ORIGIN = 0x20000000, LENGTH = 0x00040000
 }
 
 SECTIONS
@@ -36,24 +35,24 @@ SECTIONS
         *(.rodata*)
 
         KEEP(*(.eh_frame*))
-    } > RAM_APPLICATION
+    } > RAM
 
     .gnu.sgstubs :
     {
         . = ALIGN(32);
-    } > RAM_APPLICATION
+    } > RAM
 
     .ARM.extab : 
     {
         *(.ARM.extab* .gnu.linkonce.armextab.*)
-    } > RAM_APPLICATION
+    } > RAM
 
     .ARM.exidx :
     {
         __exidx_start = .;
         *(.ARM.exidx* .gnu.linkonce.armexidx.*)
         __exidx_end = .;
-    } > RAM_APPLICATION
+    } > RAM
 
     . = ALIGN(4);
     __etext = .;
@@ -84,7 +83,7 @@ SECTIONS
         KEEP(*(.jcr*))
         . = ALIGN(4);
         __data_end__ = .;
-    } > RAM_APPLICATION
+    } > RAM
 
     .bss :
     {
@@ -94,7 +93,7 @@ SECTIONS
         *(COMMON)
         . = ALIGN(4);
         __bss_end__ = .;
-    } > RAM_APPLICATION
+    } > RAM
 
     .heap (COPY):
     {
@@ -103,14 +102,14 @@ SECTIONS
         PROVIDE(end = .);
         KEEP(*(.heap*))
         __HeapLimit = .;
-    } > RAM_APPLICATION
+    } > RAM
 
     .stack_dummy (COPY):
     {
         KEEP(*(.stack*))
-    } > RAM_APPLICATION
+    } > RAM
 
-    __StackTop = ORIGIN(RAM_APPLICATION) + LENGTH(RAM_APPLICATION);
+    __StackTop = ORIGIN(RAM) + LENGTH(RAM);
     __StackLimit = __StackTop - SIZEOF(.stack_dummy);
     PROVIDE(__stack = __StackTop);
 

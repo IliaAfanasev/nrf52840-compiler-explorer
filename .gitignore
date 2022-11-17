@@ -1,7 +1,7 @@
-bazel-*
+*.o
+*.a
 .vscode/
-**/*.elf
-**/*.out
-**/*.hex
-**/*.bin
-**/*.bak
+nrfx/
+cmsis/
+arm-none-eabi/
+compiler-explorer/
